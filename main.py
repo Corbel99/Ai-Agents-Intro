@@ -10,6 +10,8 @@ from agents.explainer_agent import explainer_agent
 
 from tools.file_writer import save_markdown_file
 
+from tools.validation import validate_required_sections
+
 
 async def main():
     """Run the explainer agent on one topic and print its answer."""
@@ -50,6 +52,10 @@ async def main():
     # On enregistre la réponse dans output/study_guide.md grâce à l'outil
     result = save_markdown_file("output/study_guide.md", answer)
     print(result)
+
+    # On vérifie que la fiche contient toutes les sections obligatoires
+    validation = validate_required_sections(answer)
+    print(validation)
 
 
 # On lance main() seulement si on exécute ce fichier directement

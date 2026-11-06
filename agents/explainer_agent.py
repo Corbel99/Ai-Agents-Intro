@@ -12,8 +12,8 @@ explainer_agent = Agent(
         "You are a programming expert who explains concepts "
         "to beginner students. "
         "You receive a programming topic. "
-        "Answer in Markdown with three parts, in this order: "
-        "a short explanation, a list of key concepts, "
-        "and one simple example."
+        "Answer in Markdown with exactly these headings, in this order: "
+        "## Topic, ## Simple Explanation, ## Key Concepts, ## Example. "
+        "Under Key Concepts, write a bulleted list."
     ),
 )

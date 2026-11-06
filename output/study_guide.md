@@ -1,41 +1,45 @@
-**Explanation**
+## Topic
+Python Decorators
+=====================
 
-Python decorators are a powerful feature that allows you to modify or extend the behavior of a function without changing its implementation. A decorator is a small function that takes another function as an argument and returns a new function that "wraps" the original function. This allows you to add additional functionality to an existing function without altering its source code.
+## Simple Explanation
+--------------------
 
-Think of decorators like a wrapper around a present. You can decorate a function with a decorator, and the decorator will "wrap" the function, adding its own functionality without changing the original function.
+Python decorators are a powerful feature in Python that allows you to modify or extend the behavior of a function or class without changing its source code. In essence, a decorator is a small function that takes another function as an argument and returns a new function that "wraps" the original function. This allows you to wrap the original function with additional functionality without modifying its original code.
 
-**Key Concepts**
+Think of decorators like a layer of frosting on a cake. The original function is like the cake, and the decorator is like the frosting. You can add different flavors or decorations to the frosting without changing the cake itself.
 
-* **Decorators**: Small functions that modify or extend the behavior of another function.
-* **Wrapping**: The process of adding additional functionality to an existing function without changing its source code.
-* **Arguments**: Decorators can take arguments, which are passed to the decorator when it's applied to a function.
-* **Return values**: Decorators can return values, which are used to modify the original function's behavior.
-* **@symbol**: The `@` symbol is used to apply a decorator to a function.
-* **Function annotations**: Decorators can use function annotations to modify the behavior of a function.
+## Key Concepts
+--------------
 
-**Example**
+*   **Decorators as functions**: A decorator is a small function that takes another function as an argument.
+*   **Decorators as classes**: In Python 3.8 and later, you can also use classes as decorators.
+*   **@symbol**: The `@` symbol is used to denote a decorator. It is usually followed by the name of the decorator function or class.
+*   **Function arguments**: Decorators can take arguments, just like regular functions.
+*   **Return values**: Decorators should return a function or other callable object.
 
-Here's a simple example of a decorator that logs the execution time of a function:
+## Example
+---------
+
+Here's an example of a simple decorator that prints a message before and after the execution of the original function:
+
 ```python
-import time
-from functools import wraps
-
-def log_execution_time(func):
-    @wraps(func)
-    def wrapper(*args, **kwargs):
-        start_time = time.time()
-        result = func(*args, **kwargs)
-        end_time = time.time()
-        print(f"Function '{func.__name__}' executed in {end_time - start_time:.2f} seconds")
-        return result
+def my_decorator(func):
+    def wrapper():
+        print("Before the function is called.")
+        func()
+        print("After the function is called.")
     return wrapper
 
-@log_execution_time
-def add_numbers(a, b):
-    time.sleep(1)  # Simulate some work
-    return a + b
+@my_decorator
+def say_hello():
+    print("Hello!")
 
-result = add_numbers(2, 3)
-print(result)  # Output: 5
+say_hello()
 ```
-In this example, the `log_execution_time` decorator is applied to the `add_numbers` function. When `add_numbers` is called, the decorator measures the execution time and prints it to the console. The `wraps` function is used to preserve the original function's name and docstring.
+
+In this example, `my_decorator` is a function that takes `func` as an argument and returns a new function `wrapper`. The `wrapper` function calls the original function `func` and prints two messages before and after the execution.
+
+When we use the `@my_decorator` syntax before the `say_hello` function, we're essentially replacing the `say_hello` function with the `wrapper` function returned by `my_decorator`. So, when we call `say_hello()`, it's actually calling the `wrapper` function, which calls the original `say_hello` function and prints the messages.
+
+This is a simple example, but decorators can be much more powerful and flexible, and are used extensively in Python libraries and frameworks.
