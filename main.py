@@ -8,6 +8,8 @@ from google.genai import types
 
 from agents.explainer_agent import explainer_agent
 
+from tools.file_writer import save_markdown_file
+
 
 async def main():
     """Run the explainer agent on one topic and print its answer."""
@@ -35,16 +37,19 @@ async def main():
         parts=[types.Part(text=topic)],
     )
 
-    # Pièce 4 : l'agent travaille et renvoie des événements un par un ;
-    # on n'affiche que le dernier, la réponse finale
+
     async for event in runner.run_async(
         user_id="Thomas",
         session_id=session.id,
         new_message=message,
     ):
         if event.is_final_response():
-            # On ouvre l'enveloppe, on prend la 1re feuille, on lit le texte
-            print(event.content.parts[0].text)
+            # On garde la réponse au lieu de seulement l'afficher
+            answer = event.content.parts[0].text
+
+    # On enregistre la réponse dans output/study_guide.md grâce à l'outil
+    result = save_markdown_file("output/study_guide.md", answer)
+    print(result)
 
 
 # On lance main() seulement si on exécute ce fichier directement
