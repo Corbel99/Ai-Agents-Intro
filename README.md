@@ -98,7 +98,63 @@ be committed.
 
 ## Usage
 
-_Coming soon._
+Make sure Ollama is running, activate the virtual environment, then run:
+
+```bash
+python3 main.py
+```
+
+### Example output
+
+Topic: `Python decorators`
+
+**Explanation**
+================
+
+Python decorators are a powerful feature that allows programmers to modify or extend the behavior of functions without permanently modifying them. A decorator is a small function that takes another function as an argument and returns a new function that "wraps" the original function. This new function, also known as the "decorator function", can then be applied to any function to modify its behavior.
+
+**Key Concepts**
+---------------
+
+*   A decorator is a function that takes another function as an argument.
+*   A decorator function returns a new function that wraps the original function.
+*   Decorators are often used to:
+    *   Add functionality to existing functions without modifying them.
+    *   Create logging or authentication mechanisms for functions.
+    *   Implement aspect-oriented programming (AOP) concepts.
+*   Decorators are typically denoted by the `@` symbol before the decorator function name.
+*   There are two types of decorators:
+    *   **Simple decorators**: These are functions that take a function as an argument and return a new function.
+    *   **Class decorators**: These are functions that take a class as an argument and return a new class.
+
+**Example**
+------------
+
+```python
+# Simple decorator example
+
+def my_decorator(func):
+    def wrapper():
+        print("Something is happening before the function is called.")
+        func()
+        print("Something is happening after the function is called.")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+say_hello()
+```
+
+Output:
+```
+Something is happening before the function is called.
+Hello!
+Something is happening after the function is called.
+```
+
+In this example, `my_decorator` is a simple decorator function that takes `say_hello` as an argument and returns a new function `wrapper`. The `wrapper` function calls `say_hello` inside it and adds some extra functionality. When `say_hello` is called, it's actually the `wrapper` function that's called, which executes the original `say_hello` function and then adds its own functionality.
 
 ## Reflection
 
