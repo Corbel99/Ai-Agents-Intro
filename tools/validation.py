@@ -18,7 +18,7 @@ def validate_required_sections(markdown: str) -> dict:
 
     # Pour chaque section obligatoire, on cherche son titre Markdown
     for section in REQUIRED_SECTIONS:
-        if f"## {section}" not in markdown:
+        if f"# {section}" not in markdown:
             missing.append(section)
 
     # Le contenu est valide seulement s'il ne manque aucune section

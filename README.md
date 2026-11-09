@@ -101,9 +101,21 @@ be committed.
 Make sure Ollama is running, activate the virtual environment, then run:
 
 ```bash
-python3 main.py
+./main.py
 ```
+## Troubleshooting
 
+| Problem | Message | Solution |
+|---|---|---|
+| `.env` file missing or incomplete | `RuntimeError: Missing environment variable: OLLAMA_API_BASE` | Run `cp .env.example .env` and check the values. |
+| Ollama is not running | `RuntimeError: Ollama is not reachable at http://localhost:11434` | Start it with `ollama serve` (or `sudo systemctl start ollama`). |
+| Model not downloaded | `RuntimeError: Model 'llama3.2' is not available` | Run `ollama pull llama3.2`. |
+| Empty topic | `ValueError: Topic cannot be empty.` | Type a topic, for example `Python decorators`. |
+| File cannot be written | `Error: could not save output/study_guide.md: ...` | Check that the `output/` directory is writable. |
+| Missing sections | `Warning: missing sections: ...` | The local model is not deterministic: run the project again. |
+
+When an error occurs, read the **last line** of the traceback: it contains
+the explanation.
 ### Example output
 
 Topic: `Python decorators`

@@ -3,11 +3,12 @@
 
 from google.adk.agents import Agent
 from google.adk.models.lite_llm import LiteLlm
+from config import MODEL_NAME
 
 
 reviewer_agent = Agent(
     name="reviewer_agent",
-    model=LiteLlm(model="ollama_chat/llama3.2"),
+    model=LiteLlm(model=MODEL_NAME),
     instruction=(
         "You are a reviewer agent. "
         "You receive a draft study guide. "
@@ -15,6 +16,8 @@ reviewer_agent = Agent(
         "Do not rewrite the guide. "
         "Answer in Markdown under the heading ## Review Comments, with: "
         "missing information, unclear parts, short and specific "
-        "suggestions, and a final recommendation: approve or revise."
+        "suggestions, and a final recommendation: approve or revise. "
+        "Then add the heading ## Final Summary, with a summary of the "
+        "guide in two or three sentences."
     ),
 )
